@@ -23,14 +23,15 @@ void leerUsuarios(int* &codigosU, char** &nombresU) {
 
     // la primera parte termina con un salto de linea
     while(cin.peek()!='\n'){
-        cin >> codigo; cin.ignore();            // se ignora la coma siguiente
-        cin.getline(nombre,TAM_NOMBRE,'\n');    // se descarta el salto de final de linea
+        cin >> codigo; cin.ignore();        // se ignora la coma siguiente
+        cin.get(nombre,TAM_NOMBRE,'\n');    // se descarta el salto de final de linea
 
         // almacenamiento en los arreglos correctos
         codigosArr[cont] = codigo;
         nombresArr[cont] = stringExacto(nombre);
 
-        cont++; // cout << "contador: " << cont << endl;
+        cont++; cout << "contador: " << cont << endl;
+        cin.ignore();
     }   cin.ignore(); // se ignora salto de linea que separa la 1er y 2da parte del archivo
 
     // colocar datos en memoria dinamica exacta
@@ -43,7 +44,7 @@ void imprimirUsuarios(int* &codigosU, char** &nombresU) {
     int i = 0;
     cout << "USUARIOS" << endl;
     imprimirLinea();
-    while(codigosU[i]!=0){
+    while(codigosU[i]!=NULL){
         cout << "Codigo: " << codigosU[i] << endl;
         cout << "Nombre: " << nombresU[i] << endl;
         imprimirLinea('-');
@@ -69,7 +70,7 @@ void memoriaExacta(T* &puntero, T* arreglo, int cont){
     puntero = new T[cont+1];
     for(int i=0;i<cont;i++) {
         puntero[i] = arreglo[i];
-    }   puntero[cont] = (T)0;
+    }   puntero[cont] = NULL;
 }
 template void memoriaExacta(char**&,char**,int);
 template void memoriaExacta(int  *&,int  *,int);
