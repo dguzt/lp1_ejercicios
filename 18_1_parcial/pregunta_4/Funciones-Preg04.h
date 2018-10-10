@@ -14,7 +14,8 @@ void imprimirSolicitud(char*,char*&,char*,char,char*);
 
 int posicionLibroPrestado(char*,char***&,int&);
 int compararFechasStr(char*,char*);
-int fechaStrToInt(char*);
-int potencia(int,int);
+
+void desapilarLibroPrestamo(int&,char***&,int);
+void apilarLibroPrestamo(int&,char***&,char*,char*);
 
 #endif //PREGUNTA_4_FUNCIONES_PREG04_H

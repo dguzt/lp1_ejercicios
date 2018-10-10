@@ -1,4 +1,5 @@
 #include <iostream>
+#include <cstring>
 #include "Funciones-Preg01.h"
 #include "Funciones-Preg02.h"
 #include "Funciones-Preg03.h"

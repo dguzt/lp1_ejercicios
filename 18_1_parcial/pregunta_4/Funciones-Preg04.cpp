@@ -6,12 +6,15 @@
 #include "Funciones-Preg01.h"
 #include "Funciones-Preg02.h"
 #include "Funciones-Preg03.h"
+
 #include <iostream>
 #include <iomanip>
+#include <cstring>
 
 #define TAM_FECHA           11
 #define TAM_CODIGO_LIBRO    9
-#define TAM_OBSERVACION     30
+#define TAM_OBSERVACION     35
+#define TAM_DEFECT          5
 
 using namespace std;
 
@@ -21,7 +24,7 @@ void reporteYregistroDeSolicitudes(int* &codigosU, char** &nombresU, char**** &p
     bool morososU[numUsuarios];
     for(int i=0;i<numUsuarios;i++) morososU[i] = false;
     imprimirCabeceraSolicitudes();
-    while(!cin.eof()){
+    while(cin.peek()!='.'){
         char fechaS[TAM_FECHA];
         int  codigoU;
         char codigoL[TAM_CODIGO_LIBRO];
@@ -58,20 +61,27 @@ void imprimirCabeceraSolicitudes(){
 }
 
 void procesarSolicitud(int &tamP,char*** &prestamoP,int* &stockL,char* fechaS,char* codigoL,char operacionS,char* observacionS,bool &morosoU) {
+    // en caso desee hacer una devolucion de libro
     if(operacionS=='D'){
         // aumentar stock del libro por devolucion
         stockL[1]++;
         // obtenemos la posicion del libro a desapilar
         int posLibroP = posicionLibroPrestado(codigoL,prestamoP,tamP);
         // comparamos fechas y vemos si se convierte en moroso o no
-        int fechaBool = compararFechasStr(fechaS,prestamoP[posLibroP][1]); // -1 si la fecha1 es menor a la fecha2, 0 si son iguales, 1 si es mayor
-        // si la fecha cuando lo devuelve se pasa de la establecida en prestamo, se considerara al usuario como moroso
-        if(fechaBool==1) morosoU = true;
+        // -1 si la fecha1 es menor a la fecha2, 0 si son iguales, 1 si es mayor
+        if(compararFechasStr(fechaS,prestamoP[posLibroP][1])==1) morosoU = true;
         observacionS[0] = '\0';
-        // desapilar libro en prestamo del usuario
-
+        desapilarLibroPrestamo(tamP,prestamoP,posLibroP);
+     // en caso desee hacer un pedido de libro
     }else{
-
+        if( stockL[1]>0 && !morosoU){
+            stockL[1]--;
+            strcpy(observacionS,"Aceptada");
+            apilarLibroPrestamo(tamP,prestamoP,codigoL,fechaS);
+        }else{
+            if(stockL[1]<=0) strcpy(observacionS,"Denegada - No hay disponibilidad");
+            if(morosoU)      strcpy(observacionS,"Denegada - Moroso");
+        }
     }
 }
 
@@ -86,6 +96,7 @@ void imprimirSolicitud(char* fechaS,char* &nombreU,char* codigoL,char operacionS
 int posicionLibroPrestado(char* codigoL,char*** &prestamoP,int &tamP){
     int pos;
     for(pos=0;pos<tamP;pos++){
+        cout << codigoL << " " << prestamoP[pos][0] << endl;
         if(stringsIguales(codigoL,prestamoP[pos][0])) break;
     }   return pos;
 }
@@ -112,3 +123,31 @@ int compararFechasStr(char* fechaStr1, char* fechaStr2){
     }
     return 0;
 }
+
+void desapilarLibroPrestamo(int &tamP,char*** &prestamoP,int posLibroP){
+    delete [] prestamoP[posLibroP][0]; // string exacto del codigo del libro prestado
+    delete [] prestamoP[posLibroP][1]; // string exacto de la fecha de prestamo
+    delete [] prestamoP[posLibroP];    // dos espacios para codigo y fecha
+    // reservamos memoria exacta y dinamica para el prestamo de libros de un usuario
+    char*** auxArr = new char**[tamP - 1 + 1]; // -1 por el desapilado, +1 por el NULL al final
+    for(int posAux=0,posPres=0;posPres<tamP;posPres++){
+        if(posPres!=posLibroP){
+            auxArr[posAux] = prestamoP[posPres];
+            posAux++;
+        }
+    }
+    prestamoP = auxArr;
+    tamP--;
+}
+
+void apilarLibroPrestamo(int &tamP,char*** &prestamoP,char* codigoL,char* fechaP){
+    // si no alcanza espacio en el arreglo de libros de un alumno, se aumenta el tamanio
+    if(tamP%TAM_DEFECT==0) aumentarArreglo(prestamoP,tamP,TAM_DEFECT);
+
+    // strings exactos de codigo de libro y fecha de prestamo guardados en el prestamo de un libro de un alumno
+    prestamoP[tamP] = new char*[2];
+    prestamoP[tamP][0] = stringExacto(codigoL);
+    prestamoP[tamP][1] = stringExacto(fechaP);
+    tamP++;
+}
+
