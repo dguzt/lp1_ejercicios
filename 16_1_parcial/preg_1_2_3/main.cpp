@@ -5,7 +5,7 @@
 int main(int argc, char** argv) {
     void *contribuyentes;
     leerDatos(contribuyentes);
-    ordenarDatos(contribuyentes);
+    // ordenarDatos(contribuyentes);
     reporte(contribuyentes);
     return 0;
 }
