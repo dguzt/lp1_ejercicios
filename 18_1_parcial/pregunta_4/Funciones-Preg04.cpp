@@ -92,29 +92,23 @@ int posicionLibroPrestado(char* codigoL,char*** &prestamoP,int &tamP){
 
 // -1 si la fecha1 es menor a la fecha2, 1 si es mayor, 0 si son iguales
 int compararFechasStr(char* fechaStr1, char* fechaStr2){
-    int fechaInt1 = fechaStrToInt(fechaStr1);
-    int fechaInt2 = fechaStrToInt(fechaStr2);
-    return (fechaInt1<fechaInt2)? -1 :
-           (fechaInt1>fechaInt2)?  1 :
-                                   0 ;
+    int i;
+    // xx/xx/xxxx
+    // 01/34/6789
+    // comparando anios
+    for(i=6;i<=9;i++){
+        if(fechaStr1[i]<fechaStr2[i]) return -1;
+        if(fechaStr2[i]<fechaStr1[i]) return  1;
+    }
+    // comparando meses
+    for(i=3;i<=4;i++){
+        if(fechaStr1[i]<fechaStr2[i]) return -1;
+        if(fechaStr2[i]<fechaStr1[i]) return  1;
+    }
+    // comparando dias
+    for(i=0;i<=1;i++){
+        if(fechaStr1[i]<fechaStr2[i]) return -1;
+        if(fechaStr2[i]<fechaStr1[i]) return  1;
+    }
+    return 0;
 }
-//
-//// funcion elaborada para soportar formato fecha con y sin cero de relleno
-//// ejm: 1/2/2018 y 01/02/2018
-//int fechaStrToInt(char* fechaStr){
-//    int i=0, pot, fechaInt=0;
-//    int dia=1,mes=1,anio=1;
-//    // procesar el dia
-//    pot = 0;
-//    while(fechaStr[i]!='/'){
-//        dia+= (fechaStr[i]-'0')*(potencia(10,pot));
-//        i++; pot++;
-//    }   i++; pot=0;
-//    return 0;
-//}
-//
-//int potencia(int base,int pot){
-//    int res = 1;
-//    for(int i=0;i<pot;i++) res*=base;
-//    return res;
-//}
