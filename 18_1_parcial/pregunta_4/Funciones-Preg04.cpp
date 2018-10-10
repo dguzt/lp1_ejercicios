@@ -24,7 +24,7 @@ void reporteYregistroDeSolicitudes(int* &codigosU, char** &nombresU, char**** &p
     bool morososU[numUsuarios];
     for(int i=0;i<numUsuarios;i++) morososU[i] = false;
     imprimirCabeceraSolicitudes();
-    while(cin.peek()!='.'){
+    while(!cin.eof()){
         char fechaS[TAM_FECHA];
         int  codigoU;
         char codigoL[TAM_CODIGO_LIBRO];
@@ -35,6 +35,7 @@ void reporteYregistroDeSolicitudes(int* &codigosU, char** &nombresU, char**** &p
         int posL = posicionLibro(codigoL,librosL);
         procesarSolicitud(tamanioP[posU],prestamosP[posU],stocksL[posL],fechaS,codigoL,operacionS,observacionS,morososU[posU]);
         imprimirSolicitud(fechaS,nombresU[posU],codigoL,operacionS,observacionS);
+        cin >> ws;
     }
 }
 
@@ -72,7 +73,7 @@ void procesarSolicitud(int &tamP,char*** &prestamoP,int* &stockL,char* fechaS,ch
         if(compararFechasStr(fechaS,prestamoP[posLibroP][1])==1) morosoU = true;
         observacionS[0] = '\0';
         desapilarLibroPrestamo(tamP,prestamoP,posLibroP);
-     // en caso desee hacer un pedido de libro
+    // en caso desee hacer un pedido de libro
     }else{
         if( stockL[1]>0 && !morosoU){
             stockL[1]--;
@@ -96,7 +97,6 @@ void imprimirSolicitud(char* fechaS,char* &nombreU,char* codigoL,char operacionS
 int posicionLibroPrestado(char* codigoL,char*** &prestamoP,int &tamP){
     int pos;
     for(pos=0;pos<tamP;pos++){
-        cout << codigoL << " " << prestamoP[pos][0] << endl;
         if(stringsIguales(codigoL,prestamoP[pos][0])) break;
     }   return pos;
 }
@@ -128,14 +128,18 @@ void desapilarLibroPrestamo(int &tamP,char*** &prestamoP,int posLibroP){
     delete [] prestamoP[posLibroP][0]; // string exacto del codigo del libro prestado
     delete [] prestamoP[posLibroP][1]; // string exacto de la fecha de prestamo
     delete [] prestamoP[posLibroP];    // dos espacios para codigo y fecha
-    // reservamos memoria exacta y dinamica para el prestamo de libros de un usuario
-    char*** auxArr = new char**[tamP - 1 + 1]; // -1 por el desapilado, +1 por el NULL al final
+    // reservamos memoria de 5 en 5(#define TAM_DEFECTO) para el prestamo de libros de un usuario
+    // se separaran n espacios, donde n es el multiplo de 5 igual o inmediatamente superior a tamP-1
+    int espacios = (tamP-1)%TAM_DEFECT==0? (tamP-1) : ((tamP-1)/TAM_DEFECT + 1)*TAM_DEFECT;
+    char*** auxArr = new char**[espacios + 1]; // +1 por el NULL al final
     for(int posAux=0,posPres=0;posPres<tamP;posPres++){
+        // se evita copiar el libro devuelto
         if(posPres!=posLibroP){
             auxArr[posAux] = prestamoP[posPres];
             posAux++;
         }
-    }
+    }   auxArr[tamP-1] = NULL;
+    delete [] prestamoP;
     prestamoP = auxArr;
     tamP--;
 }

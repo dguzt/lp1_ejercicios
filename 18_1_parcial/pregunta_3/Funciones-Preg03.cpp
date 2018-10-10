@@ -30,10 +30,11 @@ int *registrarPrestamos(int* &codigosU, char**** &prestamosP, char*** &librosL, 
         char fechaP [TAM_FECHA];
         leerDatosPrestamo(codigoU,codigoL,fechaP);
         int posU = posicionUsuario(codigoU,codigosU);
+        reducirStock(codigoL,librosL,stocksL);
         registrarPrestamoUsuario(posU,prestamosP,codigoL,fechaP,tamanioP);
         contP++;
     }   cin.ignore(); // ignorar el salto de linea que separa parte 3 con parte 4
-    return NULL;
+    return tamanioP;
 }
 
 void imprimirPrestamos(int* &codigosU, char** &nombresU, char**** &prestamosP) {
@@ -62,6 +63,11 @@ void leerDatosPrestamo(int &codigoU,char* codigoL,char* fechaP){
     cin >> codigoU; cin.ignore();               // se ignora la coma siguiente
     cin.getline(codigoL,TAM_CODIGO_LIBRO,',' );
     cin.getline(fechaP ,TAM_FECHA       ,'\n');
+}
+
+void reducirStock(char* codigoL,char*** &librosL,int** &stocksL) {
+    int posL = posicionLibro(codigoL,librosL);
+    stocksL[posL][1]--;
 }
 
 template <typename T>
@@ -96,4 +102,22 @@ void registrarPrestamoUsuario(int posU,char**** &prestamosP,char* codigoL,char* 
     prestamosP[posU][tamanioP[posU]][0] = stringExacto(codigoL);
     prestamosP[posU][tamanioP[posU]][1] = stringExacto(fechaP);
     tamanioP[posU]++;
+}
+
+// esta funcion no considera el no encontrar el codigo del libro,
+// considerar implementar un assert o alerta por consola dentro del while
+int posicionLibro(char* codigoL, char*** &librosL) {
+    int pos = 0;
+    while(!stringsIguales(codigoL,librosL[pos][0])) pos++;
+    return pos;
+}
+
+bool stringsIguales(char* string1,char* string2){
+    int i=-1;
+    while(true){
+        i++;
+        if(string1[i]=='\0' && string2[i]=='\0') return true;
+        if(string1[i]==string2[i]) continue;
+        return false;
+    }
 }

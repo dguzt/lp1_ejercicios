@@ -30,7 +30,7 @@ void leerUsuarios(int* &codigosU, char** &nombresU) {
         codigosArr[cont] = codigo;
         nombresArr[cont] = stringExacto(nombre);
 
-        cont++; cout << "contador: " << cont << endl;
+        cont++;
         cin.ignore();
     }   cin.ignore(); // se ignora salto de linea que separa la 1er y 2da parte del archivo
 
