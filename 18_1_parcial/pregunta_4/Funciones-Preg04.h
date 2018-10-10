@@ -1,0 +1,8 @@
+//
+// Created by jhair on 09/10/18.
+//
+
+#ifndef PREGUNTA_4_FUNCIONES_PREG04_H
+#define PREGUNTA_4_FUNCIONES_PREG04_H
+
+#endif //PREGUNTA_4_FUNCIONES_PREG04_H
