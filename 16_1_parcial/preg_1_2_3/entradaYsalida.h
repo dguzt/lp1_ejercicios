@@ -15,4 +15,5 @@ T* numeroPreciso(T&);
 void agregarContribuyente(void*&,int&,void**&);
 template <typename T>
 void aumentarArreglo(T*&,int,int);
+void imprimirLinea(char='=');
 #endif //PREG_1_2_3_ENTRADAYSALIDA_H

@@ -11,6 +11,7 @@
 #define TAM_NOMBRE  50  // tanto apellido como nombre
 #define TAM_CARGAF  3   // SI o NO de Carga Familiar
 #define INCREMENTO  5
+#define LINEAS      100
 
 using namespace std;
 
@@ -39,7 +40,18 @@ void leerDatos(void* &contribuyentes) {
 }
 
 void reporte(void* &contribuyentes) {
-
+    int i=0;
+    while(((void**)contribuyentes)[i]!=NULL){
+        imprimirLinea();
+        cout << "DNI             : " << (char   *)((void***)contribuyentes)[i][0] << endl;
+        cout << "Nombres         : " << (char   *)((void***)contribuyentes)[i][1] << endl;
+        cout << "Apellido Paterno: " << (char   *)((void***)contribuyentes)[i][2] << endl;
+        cout << "Apellido Paterno: " << (char   *)((void***)contribuyentes)[i][3] << endl;
+        cout << "Carga Familiar  : " << (char   *)((void***)contribuyentes)[i][4] << endl;
+        cout << "Riesgo          : " << *(int   *)((void***)contribuyentes)[i][5] << endl;
+        cout << "Monto           : " << *(double*)((void***)contribuyentes)[i][6] << endl;
+        i++;
+    }
 }
 
 /*********************************************************************/
@@ -94,4 +106,8 @@ void aumentarArreglo(T* &arreglo,int cantidad,int aumento) {
 }
 template void aumentarArreglo(void**&,int,int);
 
-
+void imprimirLinea(char c){
+    for(int i=0;i<LINEAS;i++){
+        cout.put(c);
+    }   cout.put('\n');
+}
