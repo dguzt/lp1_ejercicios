@@ -9,4 +9,11 @@ void leerCursos(void*&);
 void leerMatricula(void*&);
 void imprimirListasDeClase(void*&);
 
+void guardarCurso(void***,char*,char*,int&);
+void cursosMemoriaDinamica(void*&,void*,int);
+void imprimirCursos(void*&,int);
+
+
+void imprimirLinea(char='=');
+
 #endif //PREG_1_2_3_FUNCIONES_H
