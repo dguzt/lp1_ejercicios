@@ -60,7 +60,7 @@
   LIT234    Lirica espanola de la edad de oro
       LIT237      Teoria literaria contemporanea 2
     LIT244    Literatura Peruana del siglo XIX
-       LIT246       Deontologia y lingÅistica y literatura
+       LIT246       Deontologia y lingÔøΩistica y literatura
   LIT284       Seminario de tesis 1
        LIT306       Critica Textual
       LIT312       Teatro Espanol de la Edad de Oro
@@ -77,7 +77,7 @@
        MEC299       Motores de Combustion Interna
        MEC2M1    Elementos de Maquinas 1
        MEC337        Refrigeracion y Aire Acondicionado
-      MEC346     Corrosion
+   MEC346     Corrosion
       MEC348     Ingenieria de Combustibles Gaseosos
     MEC350   Metalurgia de la Soldadura
        MIN227      Topografia Minera
@@ -85,15 +85,15 @@
        MIN250  Geologia de Yacimientos Minerales
        MIN258  Mineralogia y Petrologia
        MIN260  Perforacion y Voladura
-    MIN266      Mecanica de Rocas
-    MIN269       Concentracion de Minerales
+       MIN269 Concentracion de Minerales
   MIN344      Plan de Cierre y Recuperacion en Minas
       MIN346    Simulacion de Operaciones Mineras
       QUI204        Quimica Inorganica 1
   QUI206   Quimica Analitica 1
        QUI208        Quimica Analitica 2
       QUI211        Trabajo de Investigacion 1
-  QUI221       Quimica Organica 1
+  MIN266      Mecanica de Rocas
+   QUI221       Quimica Organica 1
     QUI223       Quimica Organica 2
     QUI237       Quimica Inorganica 3
 0
@@ -298,3 +298,4 @@
     20144988  INGA/LEYVA/RONY-ALEXANDER    DEL204    IND361     INF281     IND350       MEC299     IND375     MIN269  INF630     CIV364
     20125297    HERNANDEZ/CONTRERAS/MELVIN-ALVARO    MEC346          LIT313         DEL204       LIT284     MIN227  IND374    INF281
   20070991     CONTRERAS/EGUSQUIZA/AMARU-ALONSO     INF630     MEC337     MIN346     CIV308    IND374  CIV364    INF248     IEE203       IND361
+0

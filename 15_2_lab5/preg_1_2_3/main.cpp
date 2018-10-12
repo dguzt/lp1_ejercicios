@@ -9,7 +9,7 @@
 int main() {
     void *cursos;
     leerCursos(cursos);
-    // leerMatricula(cursos);
+    leerMatricula(cursos);
     // imprimirListasDeClase(cursos);
     return 0;
 }
