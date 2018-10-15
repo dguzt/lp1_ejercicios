@@ -9,4 +9,9 @@
 void leerExtracciones(char**&,double***&);
 void imprimirExtracciones(char**,double***,char***);
 
+void leerDatosExtraccion(double&,double&,double&,double&,double&,double&,double&,char*);
+int posicionEspecie(char**,char*,int);
+void insertarEspecie(char**&,char*,int);
+void insertarExtraccion(double**&,double,double,double,double,double,double,double);
+
 #endif //PREG03_BIB_FUNC_EXTRACCIONESF_H

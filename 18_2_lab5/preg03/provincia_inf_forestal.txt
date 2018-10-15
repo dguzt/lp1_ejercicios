@@ -1497,3 +1497,4 @@ Provincia de Tierra-del-Fuego Antártida e Islas-del-Atlántico-Sur,Provincia,Ti
 90,Tucuman,2016,Pino,t,17508,0,0,0,0
 90,Tucuman,2016,Sauce,t,0,0,0,0,9
 90,Tucuman,2016,Otras,t,540,0,59,0,0
+

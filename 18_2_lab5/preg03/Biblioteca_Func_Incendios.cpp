@@ -165,13 +165,21 @@ void aumentarArreglo(T* &arreglo, int cantidad, int incremento){
     delete [] arreglo;
     arreglo = arregloAux;
 }
-template void aumentarArreglo(long int** &,int,int);
+template void aumentarArreglo(long int**&,int,int);
+template void aumentarArreglo(double**  &,int,int);
+template void aumentarArreglo(double*** &,int,int);
+template void aumentarArreglo(char**    &,int,int);
+template void aumentarArreglo(char***   &,int,int);
+
 
 template <typename T>
 int tamanioArreglo(T* arreglo){
+    if(arreglo==(T*)0) return 0;
     int cant = 0;
     while(arreglo[cant]!=(T)0) cant++;
     return cant;
 }
 template int tamanioArreglo(char***);
 template int tamanioArreglo(long int***);
+template int tamanioArreglo(double** );
+template int tamanioArreglo(double***);
