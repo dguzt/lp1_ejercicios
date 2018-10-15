@@ -7,7 +7,6 @@
 
 int main(int argc, char** argv) {
     char*** provincias;
-    long int*** incendios;
     leerProvincias(provincias);
     imprimirProvincias(provincias);
     return 0;
