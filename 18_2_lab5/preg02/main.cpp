@@ -1,4 +1,7 @@
-#include <iostream>
+/*
+ * Autor : Jhair Guzman
+ * Codigo: 20163275
+ * */
 #include "Bib_Func_Provincias.h"
 #include "Biblioteca_Func_Incendios.h"
 
