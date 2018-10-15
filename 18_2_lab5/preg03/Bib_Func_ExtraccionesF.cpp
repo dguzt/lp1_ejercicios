@@ -92,7 +92,7 @@ void ordenarEspeciesyExtracciones(char** &especies, double*** &extracciones, int
 }
 
 void quicksortEspecies(char** &especies, double*** &extracciones, int ini, int fin){
-    if(ini<=fin) return;
+    if(ini>=fin) return;
     int part = particionEspecies(especies,extracciones,ini,fin);
     quicksortEspecies(especies,extracciones,ini,part-1);
     quicksortEspecies(especies,extracciones,part+1,fin);
