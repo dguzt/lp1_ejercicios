@@ -99,7 +99,7 @@ int compararCodigos(char** provincia1,char** provincia2){
 int StringParseoInt(char* numeroStr){
     int numeroInt = 0;
     for(int i=0;i<strlen(numeroStr);i++){
-        numeroInt += numeroInt*10 + (numeroStr[i]-'0');
+        numeroInt = numeroInt*10 + (numeroStr[i]-'0');
     }
     return numeroInt;
 }

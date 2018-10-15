@@ -156,12 +156,10 @@ void imprimirExtracciones(char** especies, double*** extracciones, char*** provi
         int cantExtr = tamanioArreglo(extraccionesxEsp);
         // se imprimen todas las extracciones con respecto a una especie
         int codigoAntP = -1; // codigo de la provincia anterior en donde se realizo una extraccion de UNA especie
-        cout << "cantidad extracciones x una especie: " << cantExtr << endl;
         for(int iExtr=0;iExtr<cantExtr;iExtr++){
             // OBS: extracciones de una especie se encuentran ordenadas por codigo y luego por anio
             int codigoP  = (int)extraccionesxEsp[iExtr][0];
             // se imprime una cabecera siempre y cuando se cambie de provincia (cambia el codigo)
-            cout << "codigo p: " << codigoP  << " antiguo: " << codigoAntP << " cont Esp: " << contEsp << endl;
             if(codigoP!=codigoAntP) imprimirCabeceraEspecie(especies[contEsp],codigoP,provincias);
             // impresion de los datos de una extraccion
             cout.precision(0);
@@ -198,7 +196,6 @@ int posicionProvinciaCodigo(char*** &provincias, int codigoP){
     int pos = 0;
     while(true){
         int codigoProv = StringParseoInt(provincias[pos][0]);
-        cout << codigoP << " == " << codigoProv << "(" << provincias[pos][0] << " - " << provincias[pos][1] << ")" << endl;
         if(codigoProv==codigoP) break;
         pos++;
     }
