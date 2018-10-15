@@ -1,4 +1,5 @@
 #include <iostream>
+#include "Bib_Func_Provincias.h"
 #include "Biblioteca_Func_Incendios.h"
 
 int main() {
